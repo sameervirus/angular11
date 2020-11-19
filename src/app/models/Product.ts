@@ -1,5 +1,6 @@
 export interface Product {
   item_name: string;
+  item_id: number;
   gender_id: number;
   size: string;
   departName: string;
@@ -16,4 +17,15 @@ export interface Product {
   colorDesc: string;
   season_id: string;
   systemPrice: string;
+  qty: number;
+  slides?:any;
+  colorCode?:string;
+}
+
+export interface Item {
+  item_name: string;
+  item_id: number;
+  msrp: string;
+  rtp: string;
+  image:string;
 }

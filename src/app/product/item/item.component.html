@@ -1,0 +1,130 @@
+<div *ngIf="item" id="product-container" itemscope="itemscope" itemtype="http://schema.org/Product">
+    <section class="bg-cl-secondary px20 product-top-section">
+        <div class="container">
+            <section class="row m0 between-xs">
+                <div class="col-xs-12 col-md-6 center-xs middle-xs image">
+                    <div class="media-gallery media-gallery--loaded">
+                        <div class="relative w-100">
+                            <div class="media-gallery-carousel">
+                                <section class="VueCarousel">
+                                    <ngx-slick-carousel class="carousel" 
+                                                        #slickModal="slick-carousel"
+                                                        [config]="slideConfig" >
+                                        <div ngxSlickItem 
+                                             *ngFor="let slide of item.slides; trackBy: onSelectColor" 
+                                             class="slide">
+                                            <img src="https://www.msou.com/collection/large/{{ slide }}" alt="" width="100%">
+                                        </div>
+                                    </ngx-slick-carousel>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-5 data">
+                    <div class="breadcrumbs h5 cl-gray pt40 pb20 hidden-xs">
+                        <span>
+                            <a href="/default-category-2" class="">Default Category</a> /
+                        </span>
+                        <span>
+                            <a href="/women/women-20" class="">Women</a> /
+                        </span>
+                        <span>
+                            <a href="/women/tops-women/tops-21" class="">Tops</a> /
+                        </span>
+                        <span>
+                            <a href="/women/tops-women/tees-women/tees-25" class="router-link-active">Tees</a> /
+                        </span>
+                        <span class="cl-mine-shaft">Elisa EverCool™ Tee</span>
+                    </div>
+                    <h1 itemprop="name" class="mb20 mt0 cl-mine-shaft product-name">{{ item.item_name }}</h1>
+                    <div class="mb20 uppercase cl-secondary">
+                        sku: {{ selectedItemSize.itemId }} - {{ item.intlDesc }}
+                    </div>
+                    <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                        <meta itemprop="priceCurrency" content="EGP">
+                        <meta itemprop="price" content="{{ item.rtp }}">
+                        <div class="mb40 price serif">
+                            <div class="h2 cl-mine-shaft weight-700">
+                                <span *ngIf="item.msrp > item.rtp" class="price-original mr5 lh30 cl-secondary">L.E {{ item.msrp }}</span>
+                                L.E {{ item.rtp }}
+                            </div>
+                        </div>
+                        <div class="cl-primary variants">
+                            <!---->
+                            <div class="h5">
+                                <div data-testid="variantsLabel" class="variants-label">
+                                    Material
+                                    <span class="weight-700">{{ item.material }}</span>
+                                </div>
+                                <div data-testid="variantsLabel" class="variants-label">
+                                    Color
+                                    <span class="weight-700">{{ item.colorDesc }}</span>
+                                </div>
+                                <div *ngIf="item.colors" class="row top-xs m0 pt15 pb40 variants-wrapper">
+                                    <div>
+                                        <button 
+                                            *ngFor="let avColor of item.colors"
+                                            [class.active] ="avColor.desc === item.colorDesc"
+                                            (click)="getItemDetails(avColor.item_id)"
+                                            class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
+                                            <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: {{avColor.code}};"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h5">
+                                <div data-testid="variantsLabel" class="variants-label">In Stock
+                                    <span class="weight-700">{{ selectedItemSize.sizeQty }}</span>
+                                </div>
+                                <div data-testid="variantsLabel" class="variants-label">Size
+                                    <span class="weight-700">{{ selectedItemSize.sizeDesc }}</span>
+                                </div>
+                                <div class="row top-xs m0 pt15 pb40 variants-wrapper">
+                                    <div *ngIf="item.sizes" class="sizes">
+                                        <button 
+                                            *ngFor="let avSize of item.sizes" 
+                                            [class.active]="avSize.sizeDesc === selectedItemSize.sizeDesc"
+                                            (click)="onSelectSize(avSize)"
+                                            aria-label="Select size XS" 
+                                            class="p0 bg-cl-primary brdr-1 brdr-cl-primary brdr-square h5 cl-tertiary size-selector mr10 mb10">
+                                            {{ avSize.sizeDesc }}
+                                        </button>                                
+                                    </div>
+                                    <a href="#" class="p0 ml30 inline-flex middle-xs no-underline h5 action size-guide pointer cl-secondary">
+                                        <i class="pr5 material-icons">accessibility</i>
+                                        <span>Size guide</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <!---->
+                    <div class="row m0 mb35">
+                        <div class="base-input-number">
+                            <label for="input_359" class="base-input-number__label cl-primary flex">Quantity</label>
+                            <input id="input_359" type="number" min="1" class="m0 no-outline base-input-number__input brdr-cl-primary bg-cl-transparent h4 empty" value="1">
+                            <div>
+                                <!---->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m0">
+                        <button type="button" class="no-outline button-full block brdr-none w-100 px10 py20 bg-cl-mine-shaft :bg-cl-th-secondary ripple weight-400 h4 cl-white sans-serif fs-medium col-xs-12 col-sm-4 col-md-6">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="row py40 add-to-buttons">
+                        <div class="col-xs-6 col-sm-3 col-md-6">
+                            <button type="button" class="p0 inline-flex middle-xs bg-cl-transparent brdr-none action h5 pointer cl-secondary"><i class="pr5 material-icons">favorite_border</i> Add to favorite
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <div id="related" [item]="item"></div>
+</div>
