@@ -1,0 +1,58 @@
+<div class="login modal-container bg-cl-primary">
+    <div>
+        <header class="modal-header py25 px65 h1 serif weight-700 bg-cl-secondary"><i (click)="closePanel(true)" class="modal-close material-icons p15 cl-bg-tertiary">close</i> Log in
+        </header>
+        <div class="modal-content pt30 pb60 px65 cl-secondary">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="relative base-input mb10">
+                    <div class="relative textbox">
+                        <input type="text" formControlName="username" [class.empty]="!loginForm.get('username').dirty" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="py10 w-100 border-box brdr-none brdr-bottom-1 brdr-cl-primary h4 sans-serif">
+                        <label>E-mail address *</label>
+                    </div>
+                    <div>
+                    	<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                            <div *ngIf="f.username.errors.required">Username is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative base-input mb10">
+                    <div class="relative textbox">
+                        <input [type]="input_type" formControlName="password" [class.empty]="!loginForm.get('password').dirty" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="py10 w-100 border-box brdr-none brdr-bottom-1 brdr-cl-primary h4 sans-serif pr30">
+                        <label>Password *</label>
+                    </div>
+                    <button (click)="toggle()" type="button" title="Toggle password visibility" class="icon material-icons absolute brdr-none no-outline p0 bg-cl-transparent cl-brdr-secondary pointer">
+                        {{ button_text }}
+                    </button>
+                    <div>
+                    	<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pass-input">
+                    <div class="col-xs-7 col-sm-6 mb20">
+                        <div class="relative checkbox">
+                            <input type="checkbox" id="remember" class="m0 no-outline">
+                            <label for="remember" class="pl35 lh30 h4 pointer">
+                                Remember me
+                            </label>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="col-xs-5 col-sm-6 mb35 flex end-xs middle-xs pointer"><a (click)="changePanel('resetpass')">Forgot the password?</a></div>
+                </div>
+                <button [disabled]="loading" type="submit" class="no-outline button-full block brdr-none w-100 px10 py20 bg-cl-mine-shaft :bg-cl-th-secondary ripple weight-400 h4 cl-white sans-serif fs-medium mb20">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Log in to your account
+                </button>
+                <div class="center-xs">
+                    or
+                    <a (click)="changePanel('register')" class="pointer">
+                    	register an account
+                    </a>
+                </div>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+    </div>
+</div>

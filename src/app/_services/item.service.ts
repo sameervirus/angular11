@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product, Item } from '../models/Product';
+import { Product, Item } from '../_models';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -35,9 +35,29 @@ export class ItemService {
     );
   }
 
+  cartData(ids:[]): Observable<[]> {
+    const url = `${this.productUrl}?action=cartData&itemIds=${ids.join()}`;
+    return this.http.get<[]>(url,this.httpOptions).pipe(
+      tap(_ => this.log(`fetched Product id=${ids}`)),
+      catchError(this.handleError<[]>(`getItemDetails id=${ids}`))
+    );
+  }
 
+  getCategoriesNames() {
+    const url = `${this.productUrl}?action=categories_name`;
+    return this.http.get(url,this.httpOptions).pipe(
+      tap(_ => this.log(`get category list`)),
+      catchError(this.handleError(`get category list`))
+    );
+  }
 
-
+  getCategory(category:string) {
+    const url = `${this.productUrl}?action=category&dep=${category}`;
+    return this.http.get(url,this.httpOptions).pipe(
+      tap(_ => this.log(`get category items`)),
+      catchError(this.handleError(`get category list`))
+    );
+  }
 
 
 

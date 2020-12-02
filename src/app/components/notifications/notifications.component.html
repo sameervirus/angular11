@@ -1,0 +1,15 @@
+<span>
+	<div *ngIf="hasNotofication" [@flyInOut]="'in'" class="notification mt30 border-box cl-white {{ style }}">
+		<div data-testid="notificationMessage" class="message p20">{{ message }}
+		</div>
+		<div class="actions">
+			<div *ngIf="button1.text" (click)="hasNotofication = false" id="notificationAction1" class="py10 px20 pointer weight-400 action-border notification-action uppercase border-{{ style }}">
+				{{ button1.text }}
+			</div>
+			<div *ngIf="button2.text" id="notificationAction2" class="py10 px20 pointer weight-400 notification-action uppercase">
+			<a *ngIf="button2.link" class="curser-pointer">{{ button2.text }}</a>
+			<span *ngElse>{{ button2.text }}</span>	
+			</div>
+		</div>
+	</div>
+</span>

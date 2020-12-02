@@ -1,0 +1,82 @@
+<div [@flyInOut]="'in'" class="microcart cl-accent bg-cl-primary">
+	<div *ngIf="loading" class="loadercontainer"><div class="lds-ripple"><div></div><div></div></div></div>
+	<div class="row middle-xs bg-cl-primary top-sm">
+		<div class="col-xs-10">
+			<h2 class="cl-accent mt15 mb35 ml40 heading">Shopping cart</h2>
+		</div>
+		<div class="col-xs-2 end-xs">
+			<button (click)="closePanel(false)" type="button" class="p0 brdr-none bg-cl-transparent close"><i class="material-icons p15 cl-accent close-icon">close</i></button>
+		</div>
+	</div>
+	<div *ngIf="!cart">
+		<h4 class="cl-accent ml30">Your shopping cart is empty.</h4>
+		<div class="ml30">Don't hesitate and <a href="/" class="router-link-exact-active router-link-active"> browse our catalog</a> to find something beautiful for You!</div>
+	</div>
+
+	<div *ngIf="cart">	
+		<ul *ngFor="let item of cart" class="bg-cl-primary m0 px40 pb40 products">
+			<li class="row flex-nowrap py10">
+				<div><div class="ml10 bg-cl-secondary">
+					<img alt="" class="image" src="https://www.msou.com/collection/small/{{item.image}}">
+				</div></div>
+				<div class="col-xs flex pl35 py15 start-xs between-sm details">
+					<div>
+						<div class="serif h4 name">{{item.item_name}}</div>
+						<div data-testid="productSku" class="h6 cl-bg-tertiary pt5 sku">{{ item.item_id }}</div>
+						<div class="h6 cl-bg-tertiary pt5 options">
+							<div>
+								<span class="opn">Color: </span>
+								<span class="opv">{{ item.colorDesc }}</span>
+							</div>
+							<div>
+								<span class="opn">Size: </span>
+								<span class="opv">{{ item.sizeDesc }}</span>
+							</div>
+							<div>
+								<span class="opn">Available Quantity: </span>
+								<span class="opv">{{ item.qtys < 1 ? 'Out of Stock' : item.qtys }}</span>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="item.qtys > 0" class="h5 pt5 cl-accent lh25 qty">
+						<div class="base-input-number">
+							<label class="base-input-number__label cl-primary flex">Quantity</label>
+							<input 
+                                type="number"                                
+                                class="m0 no-outline base-input-number__input brdr-cl-primary bg-cl-transparent h4"
+                                min="1"
+                                #qty
+                                max="{{item.qtys}}"
+                                (change)="changeQty(item.item_id,qty, item.qtys, item.qty)"
+                                value="{{ item.qty }}" 
+                                pattern="^[0-9]+\.[0-9][0-9]$"
+                                >
+							<div></div>
+						</div>
+					</div>
+				</div>
+				<div class="flex py15 mr10 align-right start-xs between-sm actions">
+					<div class="prices">
+						<span class="h4 serif price-regular">L.E {{ item.qty * item.rtp }}</span>
+					</div>
+					<div class="links">
+						<div class="mt5">
+							<button (click)="removeItem(item.item_id)" class="brdr-none bg-cl-transparent p0 middle-xs cl-secondary"><span class="hidden-xs h6">Remove</span> <i class="material-icons h4 p5 pr0">remove_shopping_cart</i></button>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="summary px40 cl-accent serif">		
+			<div class="row pt30 pb20 weight-700 middle-xs">
+				<div class="col-xs h4 total-price-label">Grand Total</div>
+				<div class="col-xs align-right h2 total-price-value">L.E {{ totalItems }}</div>
+			</div>
+		</div>
+		<div class="row py20 px40 middle-xs actions">
+			<div class="col-xs-12 first-xs col-sm-4 end-sm">
+				<a href="/checkout" class="no-outline button-full block brdr-none w-100 px10 py20 bg-cl-mine-shaft :bg-cl-th-secondary ripple weight-400 h4 cl-white sans-serif fs-medium no-underline pointer align-center border-box">Go to checkout</a>
+			</div>
+		</div>
+	</div>
+</div>

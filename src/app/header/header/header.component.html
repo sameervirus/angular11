@@ -1,0 +1,104 @@
+<div class="header">
+	<header class="fixed w-100 brdr-bottom-1 bg-cl-primary brdr-cl-secondary is-visible">
+		<div class="container px15">
+			<div class="row between-xs middle-xs">
+				<div class="col-md-4 col-xs-2 middle-xs">
+					<div>
+						<button (click)="openMenu()" type="button" class="menu-btn bg-cl-transparent brdr-none inline-flex p15 icon bg-cl-secondary pointer"><i class="material-icons">dehaze</i></button>
+					</div>
+				</div>
+
+				<div class="col-xs-2 visible-xs">
+					<button (click)="userMenu()" type="button" class="right-btn bg-cl-transparent brdr-none inline-flex p15 icon pointer"><i class="material-icons">account_circle</i></button>
+				</div>
+
+				<div class="col-md-4 col-xs-4 center-xs pt5">
+					<div>
+						<a href="/" title="Home Page" class="no-underline inline-flex router-link-exact-active router-link-active">
+						<img width="auto" height="41px" src="https://www.msou.com/images/pink.png" alt="Vuestore logo"></a>
+					</div>
+				</div>
+
+				<div class="col-xs-2 visible-xs">
+					<button (click)="openPanel('wish')" (closed)="onClose($event)" type="button" data-side="wishlist" class="right-btn inline-flex bg-cl-transparent brdr-none p15 icon pointer"><i class="material-icons">favorite_border</i></button>
+				</div>
+
+				<div class="col-md-4 col-xs-2 end-xs">
+					<div class="inline-flex right-icons">
+						<!-- <button 
+						(click)="openPanel('search')" 
+						(closed)="onClose($event)" 
+						type="button" 
+						class="right-btn bg-cl-transparent brdr-none inline-flex p15 icon hidden-xs pointer">
+						<i class="material-icons">search</i></button> -->
+
+						<button 
+						(click)="openPanel('wish')" 
+						(closed)="onClose($event)"
+						type="button" class="right-btn inline-flex bg-cl-transparent brdr-none p15 icon hidden-xs pointer"><i class="material-icons">favorite_border</i></button>
+						<button 
+						(click)="openPanel('cart')"
+						(closed)="onClose($event)"
+						type="button" class="right-btn relative bg-cl-transparent brdr-none inline-flex p15 icon pointer"><i class="material-icons">shopping_cart</i> 
+						<span *ngIf="cartQty > 0" class="minicart-count absolute flex center-xs middle-xs border-box py0 px2 h6 lh16 weight-700 cl-white bg-cl-silver">{{ cartQty }}</span></button>
+
+						<div (click)="userMenu()" class="btn-modal inline-flex relative dropdown p15 icon hidden-xs pointer">
+							<button type="button" class="bg-cl-transparent brdr-none p0"><i class="material-icons block">account_circle</i></button>
+
+							<div *ngIf="accountMenu" class="dropdown-content bg-cl-primary align-left sans-serif lh20 weight-400">
+								<div class="py5">
+									<div>
+										<a href="/my-account" class="no-underline block py10 px15">My profile</a>
+									</div>
+									<div>
+										<a href="/my-account/shipping-details" class="no-underline block py10 px15">My shipping details</a>
+									</div>
+									<div>
+										<a href="/my-account/newsletter" class="no-underline block py10 px15">My newsletter</a>
+									</div>
+									<div>
+										<a href="/my-account/orders" class="no-underline block py10 px15">My orders</a>
+									</div>
+									<div>
+										<a href="/#" class="no-underline block py10 px15">My loyalty card</a>
+									</div>
+									<div>
+										<a href="/#" class="no-underline block py10 px15">My product reviews</a>
+									</div>
+									<div>
+										<a href="/my-account/recently-viewed" class="no-underline block py10 px15">My Recently viewed products</a>
+									</div>
+								</div>
+								<div class="py5 brdr-top-1 brdr-cl-bg-secondary">
+									<a (click)="logout()" class="no-underline block py10 px15 pointer">Logout</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="header-placeholder"></div>
+</div>
+
+<!-- Right side -->
+<div class="mw-100 fixed cl-accent bg-cl-primary right-sidebar">
+	<!-- Search side -->
+	<div *ngIf="divSearch" (closed)="onClose($event)" id="searchpanel"></div>
+	<!-- End Search side -->
+	<!-- End wishlist side -->
+	<div *ngIf="divWish" (closed)="onClose($event)" id="wishpanel"></div>
+	<!-- End Search side -->
+	<!-- End wishlist side -->
+	<!-- End microcart side -->
+	<!--
+		if not empty main div has bg-cl-secondary insted of primary
+		also show h2
+	-->
+	<div *ngIf="divCart" (closed)="onClose($event)" id="cartpanel"></div>
+	<!-- End microcart side -->
+</div>
+
+<!-- menu side -->
+<div id="menu"></div>

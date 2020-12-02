@@ -1,0 +1,38 @@
+<div [@flyInOut]="'in'" class="wishlist hide-side cl-accent">
+	<div class="row">
+		<div class="col-xs-10">
+			<h2 class="cl-accent mt60 mb35 ml40 heading">Wishlist</h2>
+		</div>
+		<div class="col-xs-2 end-xs">
+			<i (click)="closePanel(false)" class="material-icons p15 pointer cl-accent close-icon">close</i>
+		</div>
+	</div>
+	<!-- Show Only if empty -->
+	<h4 class="cl-accent ml30">Your wishlist is empty.</h4>
+	<div class="ml30">Don't hesitate and <a href="/" class="router-link-exact-active router-link-active">browse our catalog</a> to find something beautiful for You!
+	</div>
+	<!-- End Show Only if empty -->
+	<ul class="product">
+		<li class="row pr55 py20">
+			<div>
+				<a href="/women/tops-women/tees-women/tees-25/diva-gym-tee-1545.html" class="router-link-active">
+					<img data-src="https://demo.storefrontcloud.io/img/150/150/resize/w/s/ws11-green_main.jpg" src="https://demo.storefrontcloud.io/img/150/150/resize/w/s/ws11-green_main.jpg" lazy="loaded">
+				</a>
+			</div>
+			<div class="col-xs between-xs flex pl40 py15">
+				<div>
+					<a href="/women/tops-women/tees-women/tees-25/diva-gym-tee-1545.html" class="router-link-active">Diva Gym Tee</a>
+					<div class="h6 cl-bg-secondary pt5">WS11-XS-Green</div>
+				</div>
+			</div>
+			<div class="col-xs flex py15 align-right">
+				<div>&nbsp;<span>$39.36</span></div>
+				<div>
+					<div class="mt5">
+						<span><button class="brdr-none bg-cl-transparent cl-accent">Remove<i class="material-icons">remove_shopping_cart</i></button></span>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

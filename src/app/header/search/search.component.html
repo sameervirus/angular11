@@ -1,0 +1,17 @@
+<div [@flyInOut]="'in'" class="searchpanel search fixed mw-100 bg-cl-primary cl-accent">
+	<div class="close-icon-row">
+		<i (click)="closePanel(false)" class="material-icons pointer cl-accent close-icon">close</i>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 end-xs">
+				<label for="search" class="visually-hidden">Search</label>
+				<div class="search-input-group">
+					<i class="material-icons search-icon">search</i>
+					<input id="search" placeholder="Type what you are looking for..." type="text" autofocus="autofocus" class="search-panel-input empty">
+				</div>
+			</div>
+		</div>
+		<div class="product-listing row"></div>
+	</div>
+</div>

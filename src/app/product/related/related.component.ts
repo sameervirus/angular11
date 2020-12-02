@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ItemService } from '../../services/item.service';
-import { Product } from '../../models/Product';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+import { ItemService } from '../../_services/item.service';
+import { Product, Item, scrollWindowToTop } from '../../_models';
 
 @Component({
   selector: '[id=related]',
@@ -8,8 +8,10 @@ import { Product } from '../../models/Product';
   styleUrls: ['./related.component.css']
 })
 export class RelatedComponent implements OnInit {
-	relateds:any;
-  @Input() item:Product;
+  relateds:any;
+  @Input() item:any;
+  @Output() getItemDetailsFromChild: EventEmitter<any> = new EventEmitter();
+
   constructor(private itemService:ItemService) { }
 
   ngOnInit(): void {
@@ -20,16 +22,12 @@ export class RelatedComponent implements OnInit {
 
   getRelatedItem(category:string,id:number): void {
 	this.itemService.getRelatedItem(category,id)
-	  .subscribe(res => {
-	    this.relateds = {
-	    	item_id: res.item_id,
-	    	item_name: res.item_name,
-	    	rtp: res.rtp,
-	    	msrp:res.msrp,
-	    	image:res.image
-	    }
-	  }		    
-	);
+	  .subscribe(res => this.relateds = res);
+  }
+
+  clickRelated(id:number): void {  	
+    this.getItemDetailsFromChild.next(id);
+    scrollWindowToTop();
   }
 
 }

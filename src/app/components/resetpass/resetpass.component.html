@@ -1,0 +1,35 @@
+<div class="reset modal-container bg-cl-primary">
+	<div *ngIf="loading" class="loadercontainer"><div class="lds-ripple"><div></div><div></div></div></div>
+	<div>
+	   <header class="modal-header py25 px65 h1 serif weight-700 bg-cl-secondary">
+	      Reset password
+	      <i (click)="closePanel(true)" class="modal-close material-icons p15 cl-bg-tertiary">
+	      close
+	      </i>
+	   </header>
+	   <div class="modal-content bg-cl-primary pt30 pb60 px65 cl-secondary">
+	      <form novalidate="novalidate">
+	         <div class="mb20">
+	            <p class="mb45">
+	               Enter your email to receive instructions on how to reset your password.
+	            </p>
+	            <div class="relative base-input">
+	               <div class="relative"><input type="email" name="email" autocomplete="" class="
+	                  py10 w-100 border-box brdr-none brdr-bottom-1
+	                  brdr-cl-primary h4 sans-serif
+	                  empty"> <label>E-mail address *</label></div>
+	            </div>
+	         </div>
+	         <button type="submit" data-testid="subscribeSubmit" class="no-outline button-full block brdr-none w-100 px10 py20 bg-cl-mine-shaft :bg-cl-th-secondary ripple weight-400 h4 cl-white sans-serif fs-medium mb35">
+	         Reset password
+	         </button> 
+	         <div class="center-xs">
+	            or
+	            <a (click)="changePanel('login')" class="pointer">
+	            return to log in
+	            </a>
+	         </div>
+	      </form>
+	   </div>
+	</div>
+</div>

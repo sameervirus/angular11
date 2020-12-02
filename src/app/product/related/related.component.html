@@ -1,4 +1,4 @@
-<section class="py20 new-collection container px15">
+<section *ngIf="relateds" class="py20 new-collection container px15">
     <div>
         <header class="col-md-12">
             <h2 class="align-center cl-accent">We found other products you might like</h2>
@@ -6,39 +6,15 @@
     </div>
     <div class="center-xs">
         <div class="product-listing row m0 center-xs start-md">
-            <div class="col-sm-6 flex col-md-3 col-xs-6">
+            <div *ngFor="let related of relateds" class="col-sm-6 flex col-md-3 col-xs-6">
                 <div class="product align-center w-100 pb20">
-                    <a href="#" class="block no-underline product-link" data-testid="productLink">
-                        <div class="product-image relative bg-cl-secondary new product-image--loaded"><img alt="Bruno Compete Hoodie" src="https://demo.storefrontcloud.io/img/310/300/resize/m/h/mh03-black_main.jpg" height="300" width="310" data-testid="productImage" class="product-image__content"></div>
+                    <a (click)="clickRelated(related.item_id)" class="block no-underline product-link cursor-pointer" data-testid="productLink">
+                        <div [class.sale]="item.msrp > item.rtp" class="product-image relative bg-cl-secondary product-image--loaded"><img alt="{{ related.category }}" src="https://www.msou.com/collection/small/{{ related.image }}" height="300" width="310" data-testid="productImage" class="product-image__content"></div>
                         <p class="mb0 cl-accent mt10">
-                            Bruno Compete Hoodie
+                            {{ related.item_name }}
                         </p>
-                        <span class="lh30 cl-secondary">$77.49</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-6 flex col-md-3 col-xs-6">
-                <div class="product align-center w-100 pb20">
-                    <a href="/gear/gear-3/didi-sport-watch-44.html" class="block no-underline product-link" data-testid="productLink">
-                        <div class="product-image relative bg-cl-secondary new product-image--loaded"><img alt="Didi Sport Watch" src="https://demo.storefrontcloud.io/img/310/300/resize/w/g/wg02-bk-0.jpg" height="300" width="310" data-testid="productImage" class="product-image__content"></div>
-                        <p class="mb0 cl-accent mt10">
-                            Didi Sport Watch
-                        </p>
-                        <span class="lh30 cl-secondary">$113.16</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-sm-6 flex col-md-3 col-xs-6">
-                <div class="product align-center w-100 pb20">
-                    <a href="/men/bottoms-men/pants-men/pants-18/caesar-warm-up-pant-742.html?childSku=MP01" class="block no-underline product-link" data-testid="productLink">
-                        <div class="product-image relative bg-cl-secondary product-image--loaded"><img alt="Caesar Warm-Up Pant" src="https://demo.storefrontcloud.io/img/310/300/resize/m/p/mp01-black_main.jpg" height="300" width="310" data-testid="productImage" class="product-image__content"></div>
-                        <p class="mb0 cl-accent mt10">
-                            Caesar Warm-Up Pant
-                        </p>
-                        <span class="price-original mr5 lh30 cl-secondary">$43.05</span>
-                        <span class="price-special lh30 cl-accent weight-700">$34.80</span>
-                        <!---->
+                        <span *ngIf="item.msrp > item.rtp" class="price-original mr5 lh30 cl-secondary">L.E {{ related.msrp }}</span>                                
+                        <span class="lh30 cl-secondary">L.E {{ related.rtp }}</span>
                     </a>
                 </div>
             </div>

@@ -1,0 +1,42 @@
+<div class="mw-100 fixed cl-accent bg-cl-primary left-sidebar">
+	<div class="sidebar-menu fixed mw-100 bg-cl-secondary">
+		<div class="row brdr-bottom-1 brdr-cl-bg-secondary top-icons">
+			<div class="col-xs bg-cl-primary">
+				<button *ngIf="menuLevel > 0" (click)="changeLevel()" type="button" aria-label="Back" class="back-btn inline-flex p15 between-xs bg-cl-transparent brdr-none"><i class="material-icons">keyboard_arrow_left</i></button>
+			</div>
+			<div class="col-xs bg-cl-primary">
+				<button (click)="closePanel()" type="button" class="w-100 inline-flex end-xs bg-cl-transparent brdr-none p0 close-btn"><i class="material-icons p15">close</i></button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 h4 serif">
+				<ul class="p0 m0 relative sidebar-menu__list" data-level="0">
+					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
+						<a href="/" class="block px25 py20 cl-accent no-underline router-link-exact-active router-link-active">Home</a></li>
+					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
+						<a href="/" class="block px25 py20 cl-accent no-underline router-link-exact-active router-link-active">New Collection</a></li>
+					
+					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary flex">
+						<div class="subcategory-item">
+							<button (click)="openPanel('category', 1)" type="button" class="inline-flex between-xs w-100 px25 py20 pr15 serif cl-accent bg-cl-transparent brdr-none fs-medium">Category<i class="material-icons">keyboard_arrow_right</i></button>
+						</div>
+						<div *ngIf="categories">
+							<ul class="sidebar-submenu absolute w-100 p0 bg-cl-primary">
+								<li *ngFor="let category of categories" class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary flex"><a routerLink="/product/{{category.slug }}" (click)="changeCategory(category.slug)" class="px25 py10 cl-accent no-underline col-xs">{{ category.desc }}</a></li>
+							</ul>
+						</div>
+					</li>
+
+					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
+						<a href="/" class="block px25 py20 cl-accent no-underline">Our Stores</a></li>
+
+					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
+						<a href="/" class="block px25 py20 cl-accent no-underline">About us</a></li>
+
+					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
+						<a href="/" class="block px25 py20 cl-accent no-underline">Contact us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

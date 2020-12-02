@@ -1,0 +1,97 @@
+<div class="register modal-container bg-cl-primary">
+	<div *ngIf="loading" class="loadercontainer"><div class="lds-ripple"><div></div><div></div></div></div>
+	<div>
+	   <header class="modal-header py25 px65 h1 serif weight-700 bg-cl-secondary">
+	      Register
+	      <i (click)="closePanel(true)" class="modal-close material-icons p15 cl-bg-tertiary">
+	      close
+	      </i>
+	   </header>
+	   <div class="modal-content bg-cl-primary pt30 pb60 px65 cl-secondary">
+	      <form novalidate="novalidate">
+	         <div class="relative base-input mb10">
+	            <div class="relative"><input type="email" name="email" autocomplete="email" class="
+	               py10 w-100 border-box brdr-none brdr-bottom-1
+	               brdr-cl-primary h4 sans-serif
+	               empty"> <label>E-mail address *</label></div>
+	             
+	            <div>
+	               <span data-testid="errorMessage" class="block cl-error h6 mt8">
+	               Field is required.
+	               </span>
+	            </div>
+	         </div>
+	         <div class="row mb10">
+	            <div class="relative base-input col-xs-6">
+	               <div class="relative"><input type="text" name="first-name" autocomplete="given-name" class="
+	                  py10 w-100 border-box brdr-none brdr-bottom-1
+	                  brdr-cl-primary h4 sans-serif
+	                  empty"> <label>First name *</label></div>
+	                
+	               <div>
+	                  
+	               </div>
+	            </div>
+	            <div class="relative base-input col-xs-6">
+	               <div class="relative"><input type="text" name="last-name" autocomplete="last-name" class="
+	                  py10 w-100 border-box brdr-none brdr-bottom-1
+	                  brdr-cl-primary h4 sans-serif
+	                  empty"> <label>Last name *</label></div>
+	                
+	               <div>
+	                  
+	               </div>
+	            </div>
+	         </div>
+	         <div class="relative base-input mb10">
+	            <div class="relative"><input type="password" name="password" autocomplete="new-password" class="
+	               py10 w-100 border-box brdr-none brdr-bottom-1
+	               brdr-cl-primary h4 sans-serif
+	               pr30 empty"> <label>Password *</label></div>
+	            <button type="button" aria-label="Toggle password visibility" title="Toggle password visibility" class="
+	               icon material-icons absolute brdr-none no-outline
+	               p0 bg-cl-transparent cl-brdr-secondary pointer
+	               ">
+	            visibility_off
+	            </button> 
+	            <div>
+	               
+	            </div>
+	         </div>
+	         <div class="relative base-input mb10">
+	            <div class="relative"><input type="password" name="password-confirm" autocomplete="new-password" class="
+	               py10 w-100 border-box brdr-none brdr-bottom-1
+	               brdr-cl-primary h4 sans-serif
+	               pr30 empty"> <label>Repeat password *</label></div>
+	            <button type="button" aria-label="Toggle password visibility" title="Toggle password visibility" class="
+	               icon material-icons absolute brdr-none no-outline
+	               p0 bg-cl-transparent cl-brdr-secondary pointer
+	               ">
+	            visibility_off
+	            </button> 
+	            <div>
+	               
+	            </div>
+	         </div>
+	         <div class="mb10">
+	            <div class="relative"><input type="checkbox" id="terms" class="m0 no-outline"> <label for="terms" class="pl35 lh30 h4 pointer">
+	               I accept terms and conditions *
+	               </label>
+	            </div>
+	            <div>
+	               
+	            </div>
+	         </div>
+	         <button type="submit" data-testid="subscribeSubmit" disabled="disabled" class="no-outline button-full block brdr-none w-100 px10 py20 bg-cl-mine-shaft :bg-cl-th-secondary ripple weight-400 h4 cl-white sans-serif fs-medium mb20 disabled button-disabled">
+	         Register an account
+	         </button> 
+	         <div class="center-xs"><span>
+	            or
+	            <a (click)="changePanel('login')" class="pointer">
+	            login to your account
+	            </a></span>
+	         </div>
+	      </form>
+	   </div>
+	</div>
+</div>
