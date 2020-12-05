@@ -33,7 +33,7 @@
 						<i class="material-icons">search</i></button> -->
 
 						<button 
-						(click)="openPanel('wish')" 
+						(click)="wishPanel()" 
 						(closed)="onClose($event)"
 						type="button" class="right-btn inline-flex bg-cl-transparent brdr-none p15 icon hidden-xs pointer"><i class="material-icons">favorite_border</i></button>
 						<button 
@@ -48,25 +48,16 @@
 							<div *ngIf="accountMenu" class="dropdown-content bg-cl-primary align-left sans-serif lh20 weight-400">
 								<div class="py5">
 									<div>
-										<a href="/my-account" class="no-underline block py10 px15">My profile</a>
+										<a routerLink="/my-account" class="no-underline block py10 px15">My profile</a>
 									</div>
 									<div>
 										<a href="/my-account/shipping-details" class="no-underline block py10 px15">My shipping details</a>
 									</div>
 									<div>
-										<a href="/my-account/newsletter" class="no-underline block py10 px15">My newsletter</a>
-									</div>
-									<div>
 										<a href="/my-account/orders" class="no-underline block py10 px15">My orders</a>
 									</div>
 									<div>
-										<a href="/#" class="no-underline block py10 px15">My loyalty card</a>
-									</div>
-									<div>
-										<a href="/#" class="no-underline block py10 px15">My product reviews</a>
-									</div>
-									<div>
-										<a href="/my-account/recently-viewed" class="no-underline block py10 px15">My Recently viewed products</a>
+										<a href="/my-account/recently-viewed" class="no-underline block py10 px15">My Wishlist</a>
 									</div>
 								</div>
 								<div class="py5 brdr-top-1 brdr-cl-bg-secondary">

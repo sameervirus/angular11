@@ -1,1 +1,97 @@
-<p>home works!</p>
+<section class="head-image w-100 bg-cl-th-accent cl-white">
+	<div class="container w-100 h-100 cl-black" data-src="/assets/full_width_banner.jpg" lazy="loaded" style="background-image: url(&quot;https://www.msou.com/images/home/banner.jpg&quot;);">
+		<div class="head-image-content hidden">
+			<h1 class="title">Walk the walk.</h1>
+			<p class="subtitle mb0 serif h3">A fashion can become the prevailing style in behaviour or manifest the newest creations of designers, technologists, engineers, and design managers.</p>
+		</div>
+	</div>
+</section>
+<section class="offers container my30 px15 cl-black hidden">
+	<div class="row">
+		<div class="offer-container col-xs-12 col-sm-6 pb15">
+			<a href="/c/women-20" class="">
+				<div class="offer" data-src="https://www.msou.com/images/home/img_9648.jpg" lazy="loaded" style="background-image: url(&quot;https://www.msou.com/images/home/img_9648.jpg&quot;);">
+					<h2 class="title m0 h1">Office casual</h2>
+					<p class="subtitle m0 serif h3 uppercase">Collection</p>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="offer-container pb15">
+				<a href="/c/men-11" class="">
+					<div class="offer offer-small border-box p5 flex bg-cl-th-accent" data-src="https://www.msou.com/images/home/summer.jpg" lazy="loaded" style="background-image: url(&quot;https://www.msou.com/images/home/summer.jpg&quot;);">
+						<h2 class="title m0 h1">Shine on</h2>
+						<p class="subtitle m0 serif h3 uppercase">Accesories</p>
+					</div>
+				</a>
+			</div>
+			<div class="offer-container pb15">
+				<a href="/c/gear-3" class="">
+					<div class="offer offer-small border-box p5 flex bg-cl-th-accent" data-src="https://www.msou.com/images/home/70.jpg" lazy="loaded" style="background-image: url(&quot;https://www.msou.com/images/home/70.jpg&quot;);">
+						<h2 class="title m0 h1">Spring is coming</h2>
+						<p class="subtitle m0 serif h3 uppercase">Hats</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="new-collection container px15">
+   <div>
+      <header class="col-md-12">
+         <h2 class="align-center cl-accent">Anytime offer</h2>
+      </header>
+   </div>
+   <div class="row center-xs">
+      <div class="product-listing row m0 center-xs start-md">
+         <div class="col-sm-6 flex col-md-3 col-xs-6">
+            <div class="product align-center w-100 pb20">
+               <a href="/product/tops" class="block no-underline product-link">
+                  <div class="product-image offer-image relative bg-cl-secondary product-image--loaded"><img alt="Radiant Tee" src="https://www.msou.com/images/home/3.png" class="product-image__content"></div>
+               </a>
+            </div>
+         </div>
+         <div class="col-sm-6 flex col-md-3 col-xs-6">
+            <div class="product align-center w-100 pb20">
+               <a href="/product/dress" class="block no-underline product-link">
+                  <div class="product-image offer-image relative bg-cl-secondary product-image--loaded"><img alt="Desiree Fitness Tee" src="https://www.msou.com/images/home/4.png" class="product-image__content"></div>
+               </a>
+            </div>
+         </div>
+         <div class="col-sm-6 flex col-md-3 col-xs-6">
+            <div class="product align-center w-100 pb20">
+               <a href="/product/outerwear" class="block no-underline product-link">
+                  <div class="product-image offer-image relative bg-cl-secondary product-image--loaded"><img alt="Desiree Fitness Tee" src="https://www.msou.com/images/home/5.png" class="product-image__content"></div>
+               </a>
+            </div>
+         </div>
+         <div class="col-sm-6 flex col-md-3 col-xs-6">
+            <div class="product align-center w-100 pb20">
+               <a href="/product/pant" class="block no-underline product-link">
+                  <div class="product-image offer-image relative bg-cl-secondary product-image--loaded"><img alt="Desiree Fitness Tee" src="https://www.msou.com/images/home/6.png" class="product-image__content"></div>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<section *ngIf="newCollection" class="new-collection container px15">
+   <div>
+      <header class="col-md-12">
+         <h2 class="align-center cl-accent">Everything new</h2>
+      </header>
+   </div>
+   <div class="row center-xs">
+      <div class="product-listing row m0 center-xs start-md">
+         <div *ngFor="let product of newCollection" class="col-sm-6 flex col-md-3 col-xs-6">
+            <div class="product align-center w-100 pb20">
+               <a routerLink="/product/{{product.slug}}/{{product.item_id}}" class="block no-underline product-link">
+                  <div class="product-image relative bg-cl-secondary product-image--loaded"><img alt="{{product.item_name}}" src="https://www.msou.com/collection/small/{{product.image}}" height="300" width="310" class="product-image__content"></div>
+                  <p class="mb0 cl-accent mt10">{{product.item_name}}</p>
+                 <span class="lh30 cl-secondary">{{product.rtp}} L.E</span>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>

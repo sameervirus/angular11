@@ -27,14 +27,17 @@
         </div>
         <div class="container">
             <div class="row m0">
-                <button class="col-xs-5 mt25 mr15 p15 mobile-filters-button bg-cl-th-accent brdr-none cl-white h5 sans-serif fs-medium-small">Filters</button>
+                <button (click)="filteredMobile = true" class="col-xs-5 mt25 mr15 p15 mobile-filters-button bg-cl-th-accent brdr-none cl-white h5 sans-serif fs-medium-small">Filters</button>
                 <div class="mobile-sorting col-xs-6 mt25">
                     <div class="sort-by">
-                        <select name="sortby" class="cl-secondary">
-                            <option selected="selected" disabled="disabled" value="">Sort By</option>
-                            <option value="updated_at">Latest</option>
-                            <option value="final_price">Price: Low to high</option>
-                            <option value="final_price:desc">Price: High to low</option>
+                        <select
+                            #selectedSortMobile
+                            (change)='onInputChange(selectedSortMobile.value)'
+                            class="cl-secondary">
+                            <option 
+                                *ngFor='let filter of sortFilters' 
+                                [disabled]="filter.value==''" 
+                                value="{{filter.value}}">{{filter.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -88,99 +91,50 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 start-xs mobile-filters" style="display: none;">
+            <div *ngIf="filteredMobile" class="col-md-3 start-xs mobile-filters">
                 <div class="close-container absolute w-100">
-                    <i class="material-icons p15 close cl-accent">close</i>
+                    <i (click)="filteredMobile = false" class="material-icons p15 close cl-accent">close</i>
                 </div>
                 <div class="sidebar mobile-filters-body">
                     <h4 class="sidebar__header">
                         <span>Filter</span>
-                        <button class="no-outline brdr-none py15 px40 bg-cl-mine-shaft :bg-cl-th-secondary ripple h5 cl-white sans-serif filters-clear" style="display: none;">Clear</button>
+                        <button *ngIf="filtered" class="no-outline brdr-none py15 px40 bg-cl-mine-shaft :bg-cl-th-secondary ripple h5 cl-white sans-serif filters-clear">Clear</button>
                     </h4>
                     <div>
                         <h5>Color</h5>
                         <div>
-                            <button aria-label="Select color Blue" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: blue;"></span>
-                            </button>
-                            <button aria-label="Select color Purple" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: purple;"></span>
-                            </button>
-                            <button aria-label="Select color Orange" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: orange;"></span>
-                            </button>
-                            <button aria-label="Select color Green" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: green;"></span>
-                            </button>
-                            <button aria-label="Select color Red" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: red;"></span>
-                            </button>
-                            <button aria-label="Select color Black" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: black;"></span>
-                            </button>
-                            <button aria-label="Select color Yellow" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: yellow;"></span>
-                            </button>
-                            <button aria-label="Select color Gray" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: gray;"></span>
-                            </button>
-                            <button aria-label="Select color White" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: white;"></span>
-                            </button>
-                            <button aria-label="Select color Brown" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
-                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: brown;"></span>
-                            </button>
+                            <button  *ngFor="let color of itemsColors" (click)="filterColors(color)" [class.active]="color == selectedColor" aria-label="Select color Blue" class="mr10 mb5 bg-cl-transparent brdr-1 brdr-circle brdr-cl-transparent :brdr-cl-bg-primary relative inline-flex pointer color">
+                                <span class="absolute brdr-circle brdr-1 brdr-cl-secondary block color-inside" style="background-color: {{color}};"></span>
+                            </button>                            
                         </div>
                     </div>
                     <div>
                         <h5>Size</h5>
                         <div>
-                            <button aria-label="Select size XS" class="p0 bg-cl-primary brdr-1 brdr-cl-primary brdr-square h5 cl-tertiary size-selector size-select mr10 mb10">XS</button>
-                            <button aria-label="Select size S" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">S</button>
-                            <button aria-label="Select size M" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">M</button>
-                            <button aria-label="Select size L" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">L</button>
-                            <button aria-label="Select size XL" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">XL</button>
-                            <button aria-label="Select size 28" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">28</button>
-                            <button aria-label="Select size 29" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">29</button>
-                            <button aria-label="Select size 30" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">30</button>
-                            <button aria-label="Select size 31" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">31</button>
-                            <button aria-label="Select size 32" class="p0 bg-cl-primary brdr-1 brdr-cl-primarybrdr-square h5 cl-tertiary size-selector size-select mr10 mb10">32</button>
+                            <button *ngFor="let size of itemsSize" (click)="filterSizes(size)" [class.active]="size == selectedSize" aria-label="Select size" class="p0 bg-cl-primary brdr-1 brdr-cl-primary brdr-square h5 cl-tertiary size-selector size-select mr10 mb10">{{ size }}</button>
                         </div>
                     </div>
                     <div>
                         <h5>Price</h5>
                         <div>
                             <div class="price-select mb10 block">
-                                <button aria-label="Price< $50" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
+                                <button aria-label="Price< 100 L.E" (click)="filterPrice('less100')" [class.active]="'less100' == selectedPrice" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
                                     <span class="bg-cl-transparent absolute block square"></span>
                                 </button>
-                                <span>&lt; $50</span>
+                                <span>&lt; 100 L.E</span>
                             </div>
                             <div class="price-select mb10 block">
-                                <button aria-label="Price$50 - 100" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
+                                <button aria-label="Price 100 - 200 L.E" (click)="filterPrice('less200')" [class.active]="'less200' == selectedPrice" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
                                     <span class="bg-cl-transparent absolute block square"></span>
                                 </button>
-                                <span>$50 - 100</span>
+                                <span>100 - 200 L.E</span>
                             </div>
                             <div class="price-select mb10 block">
-                                <button aria-label="Price$100 - 150" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
+                                <button aria-label="Price > 200 L.E" (click)="filterPrice('more200')" [class.active]="'more200' == selectedPrice" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
                                     <span class="bg-cl-transparent absolute block square"></span>
                                 </button>
-                                <span>$100 - 150</span>
+                                <span>&gt; 200 L.E</span>
                             </div>
-                            <div class="price-select mb10 block">
-                                <button aria-label="Price> $150" class="relative brdr-cl-bg-tertiary brdr-1 bg-cl-transparent mr10 pointer price-selector">
-                                    <span class="bg-cl-transparent absolute block square"></span>
-                                </button>
-                                <span>&gt; $150</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h5>Erin Recommends</h5>
-                        <div class="sidebar__inline-selecors">
-                            <button aria-label="Select No" class="bg-cl-primary brdr-1 brdr-cl-primary brdr-square h5 cl-tertiary generic-selector mr10 mb10 block">No</button>
-                            <button aria-label="Select Yes" class="bg-cl-primary brdr-1 brdr-cl-primary brdr-square h5 cl-tertiary generic-selector mr10 mb10 block">Yes</button>
                         </div>
                     </div>
                 </div>
@@ -188,11 +142,11 @@
             <p *ngIf="products" class="col-xs-12 hidden-md m0 px20 cl-secondary">{{products.length}} items</p>
             <div class="col-md-9 pt20 px10 border-box products-list">
                 <div class="product-listing row m0 center-xs start-md">
-                    <div *ngFor="let product of products | paginate: { itemsPerPage: 15, currentPage: p, totalItems: total }" class="col-sm-6 flex col-md-4 col-xs-6">
+                    <div *ngFor="let product of products | paginate: { itemsPerPage: 15, currentPage: p }" class="col-sm-6 flex col-md-4 col-xs-6">
                         <div class="product align-center w-100 pb20">
                             <a routerLink="/product/{{product.slug}}/{{product.item_id}}" class="block no-underline product-link">
                                 <div class="product-image relative product-image--loaded">
-                                    <img alt="{{ product.item_name }}" src="https://www.msou.com/collection/small/{{ product.image }}" height="300" width="310" class="product-image__content bg-cl-secondary">
+                                    <img alt="{{ product.item_name }}" src="https://www.msou.com/collection/small/{{ product.image }}" class="product-image__content bg-cl-secondary">
                                 </div>
                                 <p class="mb0 cl-accent mt10">{{ product.item_name }}</p>
                                 <span *ngIf="product.msrp > product.rtp" class="price-original mr5 lh30 cl-secondary">L.E {{ product.msrp }}</span>
@@ -201,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="align-center"><pagination-controls (pageChange)="pageChanged($event)" responsive="true"></pagination-controls></div>
+                <div class="align-center"><pagination-controls (pageChange)="pageChanged($event)"></pagination-controls></div>
             </div>
         </div>
     </div>

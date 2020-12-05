@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { LocalStorageService } from '../../_services/local-storage.service';
-import { ItemService } from '../../_services/item.service';
-import { NotificationService } from '../../_services/notification.service';
+import { ItemService } from '../../_services/';
+import { NotificationService } from '../../_services/';
 
 @Component({
   selector: '[id=cartpanel]',

@@ -11,49 +11,45 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class ItemService {
 
-	private productUrl:string = 'https://www.msou.com/3.php';
-
-	httpOptions = {
-	    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
+	private baseUrl:string = 'http://store.msou.com/api/product.php';
 
 	constructor(private http: HttpClient) { }
 
 	getItemDetails(id:number): Observable<Product> {
-		const url = `${this.productUrl}?action=itemDetails&item=${id}`;
-		return this.http.get<Product>(url, this.httpOptions).pipe(
+    let action = 'itemDetails';
+		return this.http.post<Product>(this.baseUrl, {action, id} ).pipe(
 			tap(_ => this.log(`fetched Product id=${id}`)),
 			catchError(this.handleError<Product>(`getItemDetails id=${id}`))
 		);
 	}
 
   getRelatedItem(category:string, id:number): Observable<Item> {
-    const url = `${this.productUrl}?action=related&categoryId=${category}&itemId=${id}`;
-    return this.http.get<Item>(url, this.httpOptions).pipe(
+    let action = 'related';
+    return this.http.post<Item>(this.baseUrl, {action, category, id}).pipe(
       tap(_ => this.log(`fetched related id=${id}`)),
       catchError(this.handleError<Item>(`getRelatedItem id=${id}`))
     );
   }
 
   cartData(ids:[]): Observable<[]> {
-    const url = `${this.productUrl}?action=cartData&itemIds=${ids.join()}`;
-    return this.http.get<[]>(url,this.httpOptions).pipe(
+    let action = 'cartData';
+    return this.http.post<[]>(this.baseUrl,{action, ids}).pipe(
       tap(_ => this.log(`fetched Product id=${ids}`)),
       catchError(this.handleError<[]>(`getItemDetails id=${ids}`))
     );
   }
 
   getCategoriesNames() {
-    const url = `${this.productUrl}?action=categories_name`;
-    return this.http.get(url,this.httpOptions).pipe(
+    let action = 'categories_name';
+    return this.http.post(this.baseUrl, {action} ).pipe(
       tap(_ => this.log(`get category list`)),
       catchError(this.handleError(`get category list`))
     );
   }
 
   getCategory(category:string) {
-    const url = `${this.productUrl}?action=category&dep=${category}`;
-    return this.http.get(url,this.httpOptions).pipe(
+    let action = 'category';
+    return this.http.post(this.baseUrl,{action, category}).pipe(
       tap(_ => this.log(`get category items`)),
       catchError(this.handleError(`get category list`))
     );

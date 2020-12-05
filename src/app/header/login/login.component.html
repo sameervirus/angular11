@@ -4,14 +4,16 @@
         </header>
         <div class="modal-content pt30 pb60 px65 cl-secondary">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div *ngIf="error" class="cl-error align-center mt-3 mb-0 h3">{{error}}</div>
                 <div class="relative base-input mb10">
                     <div class="relative textbox">
-                        <input type="text" formControlName="username" [class.empty]="!loginForm.get('username').dirty" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="py10 w-100 border-box brdr-none brdr-bottom-1 brdr-cl-primary h4 sans-serif">
+                        <input type="email" formControlName="email" [class.empty]="!loginForm.get('email').dirty" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="py10 w-100 border-box brdr-none brdr-bottom-1 brdr-cl-primary h4 sans-serif">
                         <label>E-mail address *</label>
                     </div>
                     <div>
-                    	<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                            <div *ngIf="f.username.errors.required">Username is required</div>
+                    	<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required" class="block cl-error h6 mt8">Email is required</div>
+                            <div *ngIf="f.email.errors.pattern" class="block cl-error h6 mt8">Email is Invalid</div>
                         </div>
                     </div>
                 </div>
@@ -25,7 +27,7 @@
                     </button>
                     <div>
                     	<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.required" class="block cl-error h6 mt8">Password is required</div>
                         </div>
                     </div>
                 </div>
@@ -50,8 +52,7 @@
                     <a (click)="changePanel('register')" class="pointer">
                     	register an account
                     </a>
-                </div>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>                
             </form>
         </div>
     </div>

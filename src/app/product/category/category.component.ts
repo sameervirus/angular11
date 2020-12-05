@@ -25,6 +25,7 @@ export class CategoryComponent implements OnInit {
   selectedPriceMin:any;
   selectedPriceMax:any;
   filtered:boolean = false;
+  filteredMobile:boolean = false;
 
   constructor(private route: ActivatedRoute,private itemService:ItemService,private spinner: NgxSpinnerService,) { }
 

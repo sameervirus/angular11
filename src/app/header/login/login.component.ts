@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../_services/';
+import { NotificationService } from '../../_services/';
 
 @Component({
   selector: '[id=login-div]',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   	private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private notificationService: NotificationService,
     private authenticationService: AuthenticationService
     ) { 
       if (this.authenticationService.currentUserValue) { 
@@ -36,7 +38,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
   	this.loginForm = this.formBuilder.group({
-        username: ['', Validators.required],
+        email: ['', Validators.compose([
+                   Validators.required,
+                   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+                  ])],
         password: ['', Validators.required]
     });
 
@@ -51,7 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+  get f() { return this.loginForm.controls; }
 
   onSubmit() {
       this.submitted = true;
@@ -62,7 +67,7 @@ export class LoginComponent implements OnInit {
       }
 
       this.loading = true;
-      this.authenticationService.login(this.f.username.value, this.f.password.value)
+      this.authenticationService.login(this.f.email.value, this.f.password.value)
           .pipe(first())
           .subscribe({
               next: () => {
@@ -70,8 +75,20 @@ export class LoginComponent implements OnInit {
                   const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                   this.closePanel(true);
                   this.router.navigate([returnUrl]);
+                  this.notificationService.sendMessages(
+                    `You're logged in!`,
+                    'success', 
+                    true, 
+                    {'text':'Ok'}, 
+                  );
               },
               error: error => {
+                  this.notificationService.sendMessages(
+                    error,
+                    'error', 
+                    true, 
+                    {'text':'Ok'}, 
+                  );
                   this.error = error;
                   this.loading = false;
               }

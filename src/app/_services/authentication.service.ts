@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
 import { User } from '../_models';
+const apiUrl = 'http://store.msou.com/api/';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -20,11 +20,12 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    login(email: string, password: string) {
+        let action = 'login';
+        return this.http.post<any>(`${apiUrl}`, { email, password, action })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('currentUser', JSON.stringify(user));                
                 this.currentUserSubject.next(user);
                 return user;
             }));

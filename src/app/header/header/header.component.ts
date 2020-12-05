@@ -57,11 +57,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openPanel(panel:string) {
-  	this.render.addClass(document.body,"no-scroll-right");
+  	this.render.addClass(document.body,"no-scroll-right");    
   	switch (panel) {
   		case "search":	this.divSearch = true;	break;
-  		case "cart":	this.divCart = true;	break;  		
-  		case "wish":	this.divWish = true;	break;  		
+  		case "cart":	this.divCart = true;	break;
+      case "wish":  this.divWish = true;  break;
   		default:	break;
   	}
   }
@@ -74,6 +74,14 @@ export class HeaderComponent implements OnInit {
   userMenu() {
     if (this.authenticationService.currentUserValue) { 
       this.accountMenu = true;
+    } else {      
+      this.openModel('login');
+    }
+  }
+
+  wishPanel() {
+    if (this.authenticationService.currentUserValue) { 
+      this.openPanel('wish');
     } else {      
       this.openModel('login');
     }

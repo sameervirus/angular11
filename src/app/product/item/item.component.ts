@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, AddToCartClass } from '../../_models';
+import { Product, AddToCartClass, scrollWindowToTop } from '../../_models';
 import { ItemService } from '../../_services';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -36,6 +36,7 @@ export class ItemComponent implements OnInit {
 
   getItemDetails(id:number): void {
     this.spinner.show();
+    scrollWindowToTop();
     this.itemService.getItemDetails(id)
       .subscribe(item => {        
         this.item = item, 

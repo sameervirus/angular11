@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AccountService } from '../../_services/';
 
 @Component({
   selector: 'app-account',
@@ -19,10 +20,27 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ]
 })
 export class AccountComponent implements OnInit {
+  
+  user:any;
+  loginUser:any;
 
-  constructor() { }
+  constructor(private accountService:AccountService) { }
 
   ngOnInit(): void {
+    this.getUserData();
+  }
+
+  getUserData() {
+    this.loginUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.accountService.getUserDetails(this.loginUser.email).subscribe((res) => this.user = res);
+  }
+
+  changeView(e:string) {
+
+  }
+
+  editDetails(e:string) {
+
   }
 
 }
