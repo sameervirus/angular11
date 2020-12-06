@@ -7,8 +7,7 @@
 				{{ button1.text }}
 			</div>
 			<div *ngIf="button2.text" id="notificationAction2" class="py10 px20 pointer weight-400 notification-action uppercase">
-			<a *ngIf="button2.link" class="curser-pointer">{{ button2.text }}</a>
-			<span *ngElse>{{ button2.text }}</span>	
+				<span (click)="clicked(button2.link)">{{ button2.text }}</span>	
 			</div>
 		</div>
 	</div>

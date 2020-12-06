@@ -47,7 +47,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  changeCategory(category:string) {
+  changeCategory() {
     this.closePanel();
     scrollWindowToTop();
   }

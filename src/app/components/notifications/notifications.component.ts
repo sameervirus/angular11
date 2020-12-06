@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { NotificationService } from '../../_services/notification.service';
+import { NotificationService } from '../../_services';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -26,30 +26,48 @@ export class NotificationsComponent implements OnInit {
 
 	hasNotofication:boolean = false;
 	subscription: Subscription;
+  timeOut:any;
   
   constructor(private notificationService: NotificationService) { 
-
-		this.subscription = notificationService.message$.subscribe(message => {
-			this.message = message.content;
-      this.style = message.style;
-      this.button1 = message.button1;
-      this.button2 = message.button2;
-			this.hasNotofication = true;
-			this.checkDismiss(message.dismissed);
-		});
+		
   }
 
   ngOnInit(): void {
+    // clearTimeout(this.timeOut);
+    // this.hasNotofication = false;
+    this.showNotify()
+  }
 
+  showNotify() {
+    console.log('OnInit')
+    this.subscription = this.notificationService.message$.subscribe(message => {
+      console.log(message)
+      clearTimeout(this.timeOut);
+      this.message = message.content;
+      this.style = message.style;
+      this.button1 = message.button1;
+      this.button2 = message.button2;
+      this.hasNotofication = true;
+      this.checkDismiss(message.dismissed);
+    });
   }
 
   checkDismiss(dismissed:boolean) {
-    console.log(dismissed);
   	if(dismissed) {
-  		setTimeout(()=>{                           
-			      this.hasNotofication = false;
-			 }, 5000);  		
+  		this.timeOut = setTimeout(()=>{
+		      this.hasNotofication = false;
+			}, 5000);
   	}
   }
+
+  clicked(link:string) {
+    this.notificationService.getReply(link);
+    this.hasNotofication = false;
+  }
+
+  // ngOnDestroy() {
+  //   // prevent memory leak when component destroyed
+  //   this.subscription.unsubscribe();
+  // }
 
 }

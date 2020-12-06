@@ -1,4 +1,4 @@
-<div class="category">
+<div *ngIf="products" class="category">
     <header class="bg-cl-secondary py35 pl20">
         <div class="container">
             <div class="breadcrumbs h5 cl-gray">
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <p *ngIf="products" class="col-xs-12 hidden-md m0 px20 cl-secondary">{{products.length}} items</p>
-            <div class="col-md-9 pt20 px10 border-box products-list">
+            <div *ngIf="products.length > 0" class="col-md-9 pt20 px10 border-box products-list">
                 <div class="product-listing row m0 center-xs start-md">
                     <div *ngFor="let product of products | paginate: { itemsPerPage: 15, currentPage: p }" class="col-sm-6 flex col-md-4 col-xs-6">
                         <div class="product align-center w-100 pb20">
@@ -156,6 +156,9 @@
                     </div>
                 </div>
                 <div class="align-center"><pagination-controls (pageChange)="pageChanged($event)"></pagination-controls></div>
+            </div>
+            <div *ngIf="products.length < 1" class="col-md-9 pt20 px10 border-box products-list">
+                <h2>There is no products!</h2>
             </div>
         </div>
     </div>

@@ -51,12 +51,16 @@ export class CategoryComponent implements OnInit {
   	this.spinner.show();
     this.itemService.getCategory(category)
       .subscribe(res => {
-        this.resetFilters();        
-      	this.products = res; 
-        this.items = res; 
-      	this.spinner.hide();
-        this.itemsColors = this.colors(res);
-        this.itemsSize = this.sizes(res);
+        if(res) {
+          this.resetFilters();
+        	this.products = res; 
+          this.items = res;         	
+          this.itemsColors = this.colors(res);
+          this.itemsSize = this.sizes(res);
+        } else {
+          this.products = [];
+        }
+        this.spinner.hide();
       });
   }
 

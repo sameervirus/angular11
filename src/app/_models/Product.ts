@@ -142,3 +142,21 @@ export class AddToCartClass {
     );
   }
 }
+
+
+export class Message {
+  content: string;
+  style: string;
+  dismissed: any;
+  button1:object;
+  button2:object;
+
+  constructor(content:string, style:string, dismissed:any, button1?:object, button2?:object) {
+    this.content = content
+    this.style = style || 'info'
+    this.dismissed =  dismissed
+    this.button1 = button1 || {}
+    this.button2 = button2 || {}
+  }
+
+}

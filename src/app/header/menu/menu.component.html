@@ -14,7 +14,7 @@
 					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
 						<a href="/" class="block px25 py20 cl-accent no-underline router-link-exact-active router-link-active">Home</a></li>
 					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary">
-						<a href="/" class="block px25 py20 cl-accent no-underline router-link-exact-active router-link-active">New Collection</a></li>
+						<a routerLink="/product/{{ 'new-collection' }}" (click)="changeCategory()" class="block px25 py20 cl-accent no-underline router-link-exact-active router-link-active">New Collection</a></li>
 					
 					<li class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary flex">
 						<div class="subcategory-item">
@@ -22,7 +22,7 @@
 						</div>
 						<div *ngIf="categories">
 							<ul class="sidebar-submenu absolute w-100 p0 bg-cl-primary">
-								<li *ngFor="let category of categories" class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary flex"><a routerLink="/product/{{category.slug }}" (click)="changeCategory(category.slug)" class="px25 py10 cl-accent no-underline col-xs">{{ category.desc }}</a></li>
+								<li *ngFor="let category of categories" class="brdr-bottom-1 brdr-cl-bg-secondary bg-cl-primary flex"><a routerLink="/product/{{category.slug }}" (click)="changeCategory()" class="px25 py10 cl-accent no-underline col-xs">{{ category.desc }}</a></li>
 							</ul>
 						</div>
 					</li>
