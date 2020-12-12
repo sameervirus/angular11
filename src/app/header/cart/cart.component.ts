@@ -1,8 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { LocalStorageService } from '../../_services/local-storage.service';
-import { ItemService } from '../../_services/';
-import { NotificationService } from '../../_services/';
+import { NotificationService, ItemService, LocalStorageService, AuthenticationService } from '../../_services/';
+import { CartService } from '../../_services/cart.service';
 
 @Component({
   selector: '[id=cartpanel]',
@@ -33,9 +32,11 @@ export class CartComponent implements OnInit {
   @Output() closed = new EventEmitter<boolean>();
 
   constructor(
-    private localStorageService: LocalStorageService,
     private itemService: ItemService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService,    
+    private localStorageService:LocalStorageService,
+    private authenticationService:AuthenticationService,
+    private cartService:CartService,
     ) { 
     notificationService.reply$.subscribe(res => {
       if(res == 'removeItem') {
@@ -44,8 +45,7 @@ export class CartComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
     this.getInit();
   }
 
@@ -94,7 +94,7 @@ export class CartComponent implements OnInit {
         item.qty = qty;
       }
     });
-    this.localItems.qty = this.localItems.qty + diff;    
+    this.localItems.qty = this.localItems.qty + diff;
     this.localStorageService.set('cart', this.localItems);
     this.getInit();
   }
@@ -119,6 +119,11 @@ export class CartComponent implements OnInit {
       }
     });
     this.localItems.qty = Number(this.localItems.qty) - Number(diff);
+    if(this.authenticationService.currentUserValue) { 
+      let currentUser = this.localStorageService.get('currentUser');
+      let itemsIds = this.localItems.items.map(item => item.item_id);
+      this.cartService.addToServer(itemsIds, currentUser.id).subscribe();
+    }
     if(this.localItems.items.length == 0) {
       this.localStorageService.remove('cart');
       this.cart = undefined;

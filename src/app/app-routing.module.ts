@@ -12,7 +12,7 @@ const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'product/:category', component: CategoryComponent },
 	{ path: 'product/:category/:item', component: ItemComponent },
-	{ path: 'my-account', component: AccountComponent, canActivate: [AuthGuard] },
+	{ path: 'my-account/:page', component: AccountComponent, canActivate: [AuthGuard] },
 
 	// otherwise redirect to home
     { path: '**', redirectTo: '' }

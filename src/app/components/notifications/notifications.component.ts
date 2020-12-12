@@ -39,9 +39,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   showNotify() {
-    console.log('OnInit')
     this.subscription = this.notificationService.message$.subscribe(message => {
-      console.log(message)
       clearTimeout(this.timeOut);
       this.message = message.content;
       this.style = message.style;

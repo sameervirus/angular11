@@ -103,6 +103,6 @@ export class ItemService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    console.log(message);
+    // console.log(message);
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Renderer2 } from '@angular/core';
 
-import { LocalStorageService } from '../../_services';
-import { AuthenticationService } from '../../_services';
+import { AuthenticationService, LocalStorageService } from '../../_services';
 
 @Component({
   selector: '[id=header]',
@@ -24,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private render:Renderer2,
-    private localStorageService: LocalStorageService,
+    private localStorageService:LocalStorageService,
     private authenticationService: AuthenticationService
     ) { }
 

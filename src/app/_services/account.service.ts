@@ -17,4 +17,14 @@ export class AccountService {
   	let action = 'user_details';
     return this.http.post<any>(this.baseUrl, { action, email });
   }
+
+  getUserOrders(id:number) {
+  	let action = 'getUserOrders';
+  	return this.http.post<any>(this.baseUrl, {action, id});
+  }
+
+  getUserOrder(code:string) {
+  	let action = 'getOrder';
+  	return this.http.post<any>(this.baseUrl, {action, code});
+  }
 }

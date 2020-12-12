@@ -6,10 +6,10 @@
                     <a routerLink="" class="">Home</a>
                     /
                 </span>
-                <span class="cl-mine-shaft">{{name | titlecase }}</span>
+                <span class="cl-mine-shaft">{{ name | titleCases }}</span>
             </div>
             <div class="row middle-sm">
-                <h1 class="col-sm-9 category-title mb10">{{name | uppercase }} </h1>
+                <h1 class="col-sm-9 category-title mb10">{{ name | titleCases }} </h1>
                 <div class="sorting col-sm-3 align-right">
                     <div class="sort-by">
                         <select
@@ -98,7 +98,7 @@
                 <div class="sidebar mobile-filters-body">
                     <h4 class="sidebar__header">
                         <span>Filter</span>
-                        <button *ngIf="filtered" class="no-outline brdr-none py15 px40 bg-cl-mine-shaft :bg-cl-th-secondary ripple h5 cl-white sans-serif filters-clear">Clear</button>
+                        <button *ngIf="filtered" (click)="resetFilters()" class="no-outline brdr-none py15 px40 bg-cl-mine-shaft :bg-cl-th-secondary ripple h5 cl-white sans-serif filters-clear">Clear</button>
                     </h4>
                     <div>
                         <h5>Color</h5>
@@ -142,11 +142,15 @@
             <p *ngIf="products" class="col-xs-12 hidden-md m0 px20 cl-secondary">{{products.length}} items</p>
             <div *ngIf="products.length > 0" class="col-md-9 pt20 px10 border-box products-list">
                 <div class="product-listing row m0 center-xs start-md">
-                    <div *ngFor="let product of products | paginate: { itemsPerPage: 15, currentPage: p }" class="col-sm-6 flex col-md-4 col-xs-6">
+                    <div *ngFor="let product of products | paginate: { itemsPerPage: 15, currentPage: p }" class="col-sm-6 flex col-md-4 col-xs-12">
                         <div class="product align-center w-100 pb20">
                             <a routerLink="/product/{{product.slug}}/{{product.item_id}}" class="block no-underline product-link">
                                 <div class="product-image relative product-image--loaded">
-                                    <img alt="{{ product.item_name }}" src="https://www.msou.com/collection/small/{{ product.image }}" class="product-image__content bg-cl-secondary">
+                                    <img 
+                                        alt="{{ product.item_name }}" 
+                                        [defaultImage]="'assets/placeholder.svg'"
+                                        [lazyLoad]="'https://www.msou.com/collection/small/' + product.image " 
+                                        class="product-image__content bg-cl-secondary">
                                 </div>
                                 <p class="mb0 cl-accent mt10">{{ product.item_name }}</p>
                                 <span *ngIf="product.msrp > product.rtp" class="price-original mr5 lh30 cl-secondary">L.E {{ product.msrp }}</span>

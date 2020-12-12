@@ -9,6 +9,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { CategoryComponent } from './product/category/category.component';
 import { HomeComponent } from './home/home.component';
 import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
+import { TitleCasePipe } from './custompipe/title-case.pipe';
+import { OrderComponent } from './checkout/order/order.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
     RegistrationComponent,
     CategoryComponent,
     HomeComponent,
-    RemovewhitespacesPipe
+    RemovewhitespacesPipe,
+    TitleCasePipe,
+    OrderComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +70,8 @@ import { RemovewhitespacesPipe } from './custompipe/removewhitespaces.pipe';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    LazyLoadImageModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

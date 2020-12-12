@@ -7,7 +7,7 @@
                 <div *ngIf="error" class="cl-error align-center mt-3 mb-0 h3">{{error}}</div>
                 <div class="relative base-input mb10">
                     <div class="relative textbox">
-                        <input type="email" formControlName="email" [class.empty]="!loginForm.get('email').dirty" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="py10 w-100 border-box brdr-none brdr-bottom-1 brdr-cl-primary h4 sans-serif">
+                        <input type="email" formControlName="email" autocomplete="" [class.empty]="!loginForm.get('email').dirty" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="py10 w-100 border-box brdr-none brdr-bottom-1 brdr-cl-primary h4 sans-serif">
                         <label>E-mail address *</label>
                     </div>
                     <div>
